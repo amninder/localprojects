@@ -5,18 +5,16 @@
 
 {% block content %}
 
-    <div id="values">
         {% for integer_value in integer_values %}
-            <p data-value-id='{{ integer_value.pk }}'>
-                <label>{{ integer_value.attribute.token }}</label>
-                <output data-value-id='yes-{{ integer_value.pk }}'>Yes: {{ integer_value.yes }}</output>
-                <output data-value-id='no-{{ integer_value.pk }}'>No: {{ integer_value.no }}</output>
-            </p>
-        {% empty %}
-            <p class="empty">No values yet.</p>
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-2"><label>{{ integer_value.attribute.token }}</label></div>
+                  <div class="col-md-5"><output data-value-id='yes-{{ integer_value.pk }}'>Yes: {{ integer_value.yes }}</output></div>
+                  <div class="col-md-5"><output data-value-id='no-{{ integer_value.pk }}'>No: {{ integer_value.no }}</output></div>
+              </div>
+            </div>
+            <br />
         {% endfor %}
-    </div>
-
 {% endblock %}
 
 {% block extra_body %}
