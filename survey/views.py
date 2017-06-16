@@ -155,9 +155,9 @@ class PersonDetail(mixins.RetrieveModelMixin,
             try:
                 t = models.Token.objects.get(attribute__id=token.get('id'))
                 if answer in ('yes', 'YES'):
-                    t.yes += token.get('yes')
+                    t.value += token.get('yes')
                 else:
-                    t.no += token.get('no')
+                    t.value += token.get('no')
                 t.save()
             except Exception:
                 pass

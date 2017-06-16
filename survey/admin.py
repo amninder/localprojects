@@ -14,7 +14,7 @@ class RefQuestionAdmin(admin.ModelAdmin):
 
 
 class TokenAdmin(admin.ModelAdmin):
-    list_display = ('attribute', 'yes', 'no')
+    list_display = ('attribute', 'value')
 
 
 class PersonAdmin(admin.ModelAdmin):

@@ -25,8 +25,9 @@ class RefToken(models.Model):
 
 class Token(models.Model):
     attribute = models.ForeignKey(RefToken, related_name='attribute')
-    yes = models.IntegerField(default=0)
-    no = models.IntegerField(default=0)
+    # yes = models.IntegerField(default=0)
+    # no = models.IntegerField(default=0)
+    value = models.IntegerField(default=0)
 
     def __str__(self):
         return self.attribute.token
@@ -70,7 +71,7 @@ class IntegerValueBinding(WebsocketBinding):
 
     model = Token
     stream = "intval"
-    fields = ["attribute", "yes", "no"]
+    fields = ["attribute", "value"]
 
     @classmethod
     def group_names(cls, *args, **kwargs):

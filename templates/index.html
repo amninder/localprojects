@@ -9,12 +9,13 @@
             <div class="container">
               <div class="row">
                   <div class="col-md-2"><label>{{ integer_value.attribute.token }}</label></div>
-                  <div class="col-md-5"><output data-value-id='yes-{{ integer_value.pk }}'>Yes: {{ integer_value.yes }}</output></div>
-                  <div class="col-md-5"><output data-value-id='no-{{ integer_value.pk }}'>No: {{ integer_value.no }}</output></div>
+                  <div class="col-md-5"><output data-value-id='value-{{ integer_value.pk }}'>Value: {{ integer_value.value }}</output></div>
               </div>
             </div>
             <br />
         {% endfor %}
+<div id="myDiv" style="width: 480px; height: 400px;">
+</div>
 {% endblock %}
 
 {% block extra_body %}
@@ -30,12 +31,11 @@
                 // Handle different actions
                 if (payload.action == "create") {
                     // Create the new integer value
-                    var content = "<p data-value-id='" + payload.attribute + "'><label>" + payload.data.attribute.token + "</label> <output id='yes-"+ payload.attribute +"'>"+"Yes: " + payload.data.yes + "</output><output id='no-" + payload.pk + "'>"+ "No:" + payload.data.no + "</output>";
+                    var content = "<p data-value-id='" + payload.attribute + "'><label>" + payload.data.attribute.token + "</label> <output id='value-"+ payload.attribute +"'>"+"Value: " + payload.data.value + "</output>";
                 } else if (payload.action == "update") {
                     console.log(payload);
                     $("p[data-value-id=" + payload.attribute + "] label").text(payload.data.attribute.token);
-                    $("output[data-value-id='yes-" + payload.pk + "']").text("Yes: " + payload.data.yes);
-                    $("output[data-value-id='no-" + payload.pk + "']").text("No: " + payload.data.no);
+                    $("output[data-value-id='value-" + payload.pk + "']").text("Value: " + payload.data.value);
                 } else if (payload.action == "delete") {
                     console.log(payload)
                     $("p[data-value-id=" + payload.pk + "]").remove();
@@ -48,5 +48,13 @@
             webSocketBridge.socket.addEventListener('open', function() { console.log("Connected to notification socket"); });
             webSocketBridge.socket.addEventListener('close', function() { console.log("Disconnected to notification socket"); });
         });
+        var data = [{
+          type: 'bar',
+          x: [20, 14, 23],
+          y: ['giraffes', 'orangutans', 'monkeys'],
+          orientation: 'h'
+        }];
+
+        Plotly.newPlot('myDiv', data);
     </script>
 {% endblock %}
